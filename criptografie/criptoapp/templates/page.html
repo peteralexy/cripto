@@ -1,0 +1,13 @@
+{% extends "criptoapp/base.html" %}
+{% block content %}
+    <!--
+    <a href="{% url 'criptoapp:index' %}">To Index</a>
+    -->
+    <p>In the voting page</p>
+    <h2>Vote!</h2>
+    <form action="{% url 'criptoapp:page' %}" method='post'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button name="submit">press to vote</button>
+    </form>
+{% endblock content %}
