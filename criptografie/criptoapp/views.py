@@ -35,7 +35,7 @@ def page(request):
             decrypted_msg = decrypt(public, encrypted_msg)
             #conn to mysq;
 
-            mysqslcc = mc.connect(host='localhost', database='evoting')
+            mysqslcc = mc.connect(host='localhost', user='root', password='1234', database='evoting')
 
             cursor = mysqslcc.cursor()
 
