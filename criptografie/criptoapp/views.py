@@ -64,7 +64,7 @@ def page(request):
                     SET votes = votes + 1
                     WHERE name LIKE '{0}'
                     """.format(
-                        voter.voter_vote
+                        decrypted_msg
                     )
                 )
 
