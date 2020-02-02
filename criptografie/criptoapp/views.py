@@ -39,10 +39,34 @@ def page(request):
 
             cursor = mysqslcc.cursor()
 
-            cursor.execute("""SELECT * FROM evoting.candidate;""")
+            cursor.execute(
+                """
+                SELECT * FROM evoting.voter
+                WHERE name LIKE '{0}' AND age LIKE '{1}' AND city LIKE '{2}' AND country LIKE '{3}' AND address LIKE '{4}' 
+                """.format(voter.voter_name, voter.voter_age, voter.voter_city, voter.voter_county, voter.voter_address)
+            )
 
-            candidates = cursor.fetchall()
+            c = cursor.fetchall()
 
+            if len(c) == 0:
+                cursor.execute(
+                    """
+                    INSERT INTO evoting.voter
+                    VALUES
+                    ({0}, {1}, {2}, {3}, {4}, {5})
+                    """.format(
+                        voter.voter_name, voter.voter_age, voter.voter_city, voter.voter_county, voter.voter_address
+                    )
+                )
+                cursor.execut(
+                    """
+                    UPDATE evoting.candidate
+                    SET votes = votes + 1
+                    WHERE name LIKE '{0}'
+                    """.format(
+                        voter.voter_vote
+                    )
+                )
 
             return HttpResponseRedirect(reverse('criptoapp:index'))
 
