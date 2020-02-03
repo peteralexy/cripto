@@ -33,7 +33,6 @@ def page(request):
             message = str(voter.voter_vote)
             encrypted_msg = encrypt(private, message)
             decrypted_msg = decrypt(public, encrypted_msg)
-            #conn to mysq;
 
             mysqslcc = mc.connect(host='localhost', user='root', password='1234', database='evoting')
 
